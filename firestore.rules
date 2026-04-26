@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: content
+    // Document ID: global
+    // Fields:
+    //   - Any string key: string value (CMS content)
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.email == "glehaudbongnenetcesar@gmail.com" && request.auth.token.email_verified == true;
+    }
+
+    match /content/{documentId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /content_images/{documentId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /contacts/{documentId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /newsletter/{documentId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

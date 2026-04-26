@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "CMSContent": {
+      "title": "CMS Content",
+      "description": "Global content for the website, including text, image URLs, and stringified JSON for news items.",
+      "type": "object",
+      "properties": {}
+    },
+    "CMSImage": {
+      "title": "CMS Image",
+      "description": "Base64 encoded image strings to avoid 1MB limit on a single document.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Base64 encoded image string."
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/content/{documentId}": {
+      "schema": {
+        "$ref": "#/entities/CMSContent"
+      },
+      "description": "Stores the global CMS content. Typically a single document named 'global'."
+    },
+    "/content_images/{documentId}": {
+      "schema": {
+        "$ref": "#/entities/CMSImage"
+      },
+      "description": "Stores base64 encoded images for the CMS."
+    },
+    "/contacts/{documentId}": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "company": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "service": { "type": "string" },
+          "message": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "description": "Stores contact form submissions."
+    },
+    "/newsletter/{documentId}": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "description": "Stores newsletter subscriptions."
+    }
+  }
+}
