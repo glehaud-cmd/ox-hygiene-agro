@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function Admin() {
   const { user, login, logout, isEditing, toggleEditMode } = useCMS();
   const navigate = useNavigate();
-  const ADMIN_EMAILS = ["glehaudbongnenetcesar@gmail.com", "glehaudbc@gmail.com"];
+  const ADMIN_EMAILS = ["glehaudbongnenetcesar@gmail.com", "ephremattia82@gmail.com"];
 
   const isAdmin = user && ADMIN_EMAILS.includes(user.email || "");
 
