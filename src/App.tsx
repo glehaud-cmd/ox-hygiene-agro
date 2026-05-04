@@ -50,11 +50,9 @@ export default function App() {
     <CMSProvider>
       <Router>
         <ScrollToTop />
-        <AnimatePresence>
-          {loading && <Loader />}
-        </AnimatePresence>
-        
-        {!loading && (
+        {loading ? (
+          <Loader />
+        ) : (
           <div className="relative w-full overflow-x-hidden">
             <Navbar />
             <main>
