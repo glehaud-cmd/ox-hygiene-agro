@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Quote, ChevronLeft, ChevronRight, X, Send, CheckCircle2, MessageSquare, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import EditableText from './cms/EditableText';
@@ -106,13 +106,9 @@ export default function Testimonials() {
       </div>
 
       {/* Testimonial Modal */}
-      <AnimatePresence>
-        {isModalOpen && (
+      {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div 
               onClick={() => setIsModalOpen(false)}
               className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
             />
@@ -209,7 +205,6 @@ export default function Testimonials() {
             </motion.div>
           </div>
         )}
-      </AnimatePresence>
     </section>
   );
 }

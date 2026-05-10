@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Menu, X, ShieldCheck, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCMS } from '../context/CMSContext';
@@ -101,20 +101,15 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
+      {isMobileMenuOpen && (
           <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               onClick={() => setIsMobileMenuOpen(false)}
               className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 lg:hidden"
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-white z-[60] lg:hidden shadow-2xl flex flex-col"
             >
@@ -135,14 +130,12 @@ export default function Navbar() {
                     <span>Notre entreprise</span>
                     <ChevronDown className={`w-5 h-5 transition-transform ${mobileDropdown === 'entreprise' ? 'rotate-180' : ''}`} />
                   </button>
-                  <AnimatePresence>
-                    {mobileDropdown === 'entreprise' && (
-                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden bg-white border-l-2 border-slate-100 ml-6 pl-2 mt-1">
+                  {mobileDropdown === 'entreprise' && (
+                      <div className="overflow-hidden bg-white border-l-2 border-slate-100 ml-6 pl-2 mt-1">
                         <Link to="/presentation" className="block px-4 py-3 text-left text-base font-medium text-slate-600 hover:text-accent rounded-lg hover:bg-slate-50">Présentation</Link>
                         <Link to="/partenaires-personnel" className="block px-4 py-3 text-left text-base font-medium text-slate-600 hover:text-accent rounded-lg hover:bg-slate-50">Partenaires & personnel</Link>
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
                 </div>
 
                 <div className="space-y-1">
@@ -150,9 +143,8 @@ export default function Navbar() {
                     <span>Départements et Produits</span>
                     <ChevronDown className={`w-5 h-5 transition-transform ${mobileDropdown === 'departements' ? 'rotate-180' : ''}`} />
                   </button>
-                  <AnimatePresence>
-                    {mobileDropdown === 'departements' && (
-                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden bg-white border-l-2 border-slate-100 ml-6 pl-2 mt-1">
+                  {mobileDropdown === 'departements' && (
+                      <div className="overflow-hidden bg-white border-l-2 border-slate-100 ml-6 pl-2 mt-1">
                         <Link to="/departement-agro" className="block px-4 py-3 text-left text-base font-medium text-slate-600 hover:text-accent rounded-lg hover:bg-slate-50">Département Agro</Link>
                         <Link to="/departement-biotech" className="block px-4 py-3 text-left text-base font-medium text-slate-600 hover:text-accent rounded-lg hover:bg-slate-50">Département Biotech</Link>
                         <Link to="/departement-applicateur" className="block px-4 py-3 text-left text-base font-medium text-slate-600 hover:text-accent rounded-lg hover:bg-slate-50">Département Applicateur</Link>
@@ -176,7 +168,6 @@ export default function Navbar() {
             </motion.div>
           </>
         )}
-      </AnimatePresence>
     </motion.nav>
   );
 }
